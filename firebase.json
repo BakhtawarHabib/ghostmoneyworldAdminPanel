@@ -1,7 +1,7 @@
 {
   "apphosting": [
     {
-      "backendId": "videos",
+      "backendId": "ghostmoneyworld",
       "rootDir": "/",
       "ignore": [
         "node_modules",
