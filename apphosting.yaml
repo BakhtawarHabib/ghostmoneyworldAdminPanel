@@ -60,7 +60,7 @@ env:
 
   # Public API URL
   - variable: NEXT_PUBLIC_API_URL
-    value: "https://videos--ghost-money-world.us-east4.hosted.app/api"
+    value: "https://ghostmoneyworld--ghost-money-world.us-east4.hosted.app/api"
     availability:
       - BUILD
       - RUNTIME
