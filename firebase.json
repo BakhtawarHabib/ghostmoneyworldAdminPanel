@@ -10,7 +10,10 @@
         "firebase-debug.*.log",
         "functions"
       ],
-      "alwaysDeployFromSource": true
+      "alwaysDeployFromSource": true,
+      "secrets": {
+        "FIREBASE_SERVICE_ACCOUNT": "firebaseServiceAccount"
+      }
     }
   ]
 }
