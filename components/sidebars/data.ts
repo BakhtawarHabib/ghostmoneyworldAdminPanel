@@ -13,8 +13,7 @@ export function GetSidebarData() {
     if (pathname === url) {
       return true;
     }
-    // If the URL ends with a slash and the pathname starts with it (e.g., /access-control/ matches /access-control/roles)
-    // Or if the URL does not end with a slash, check if the pathname starts with the URL followed by a slash (e.g., /access-control/foo matches /access-control)
+  
     if (url.endsWith("/")) {
       return pathname.startsWith(url);
     } else {

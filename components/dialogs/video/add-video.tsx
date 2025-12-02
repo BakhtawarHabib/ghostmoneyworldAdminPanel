@@ -79,6 +79,7 @@ export function AddVideo() {
       // Prepare payload with uploaded URLs
       const payload = {
         title: formData.title,
+        descriptopn: formData.description,
         thumbnail: thumbnailUrl,
         video: videoUrl,
         category: formData.category,
@@ -129,6 +130,11 @@ export function AddVideo() {
                 label="Video Title"
                 formControl={form.control}
                 placeholder="Video Title"
+              /> <InputFormField
+                name="description"
+                label="Video Description"
+                formControl={form.control}
+                placeholder="Video Description"
               />
               <FileUploadFormField
                 name="thumbnail"

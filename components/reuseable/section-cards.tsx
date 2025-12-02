@@ -1,149 +1,80 @@
-import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
-import { Badge } from "@/components/ui/badge";
+"use client";
+
+import { useEffect, useState } from "react";
+import { getDocuments } from "@/lib/firebase/firestore";
+
 import {
   Card,
-  CardAction,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
-import { Smile } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Pencil } from "lucide-react";
 
-export function SectionCards() {
+export function VideoCards() {
+  const [videos, setVideos] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const { data, error } = await getDocuments("videos");
+
+      if (!error && data) {
+        setVideos(data);
+      }
+
+      setLoading(false);
+    };
+
+    fetchVideos();
+  }, []);
+
+  if (loading) {
+    return <div className="px-4 py-6 text-sm text-muted-foreground">Loading videos...</div>;
+  }
+
   return (
-    <div className="*:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:shadow-xs lg:px-6 @xl/main:grid-cols-2 @5xl/main:grid-cols-3">
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Total Revenue</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            $ 250.00
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              +12.5%
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Trending up this month <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Visitors for the last 6 months
-          </div>
-        </CardFooter>
-      </Card>
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>New Customers</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            1,234
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingDown />
-              -20%
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Down 20% this period <IconTrendingDown className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Acquisition needs attention
-          </div>
-        </CardFooter>
-      </Card>
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Active Accounts</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            45,678
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              +12.5%
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Strong user retention <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">Engagement exceed targets</div>
-        </CardFooter>
-      </Card>
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Growth Rate</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            4.5%
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              +4.5%
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Steady performance increase <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">Meets growth projections</div>
-        </CardFooter>
-      </Card>
-      {/* 🆕 Customer Satisfaction Card */}
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Customer Satisfaction</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            92%
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <Smile />
-              +3%
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Improved feedback score <Smile className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Based on 1,200 recent reviews
-          </div>
-        </CardFooter>
-      </Card>
+    <div className="grid grid-cols-1 gap-4 px-4 lg:px-6 sm:grid-cols-2 xl:grid-cols-3">
+      {videos.map((video) => (
+        <Card key={video.id} className="@container/card overflow-hidden">
+          {/* Thumbnail */}
+          <img
+            src={video.thumbnail}
+            alt={video.title}
 
-      {/* 🆕 Conversion Rate Card */}
-      <Card className="@container/card">
-        <CardHeader>
-          <CardDescription>Conversion Rate</CardDescription>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
-            8.7%
-          </CardTitle>
-          <CardAction>
-            <Badge variant="outline">
-              <IconTrendingUp />
-              +1.2%
-            </Badge>
-          </CardAction>
-        </CardHeader>
-        <CardFooter className="flex-col items-start gap-1.5 text-sm">
-          <div className="line-clamp-1 flex gap-2 font-medium">
-            Strong marketing ROI <IconTrendingUp className="size-4" />
-          </div>
-          <div className="text-muted-foreground">
-            Growth driven by new ad campaigns
-          </div>
-        </CardFooter>
-      </Card>
+            className="h-50 w-full object-cover"
+
+          />
+
+          {/* Title + Duration */}
+          <CardHeader>
+            <CardTitle className="text-base font-semibold line-clamp-1">
+              {video.title}
+            </CardTitle>
+
+            <CardDescription className="text-sm">
+              {video.duration}
+            </CardDescription>
+          </CardHeader>
+
+          {/* Edit Button */}
+          <CardFooter className="flex justify-between items-center">
+            <div className="text-muted-foreground text-sm">
+              Duration: {video.duration}
+            </div>
+
+            <Button
+              size="icon"
+              variant="outline"
+              onClick={() => console.log("Edit:", video.id)}
+            >
+              <Pencil className="size-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      ))}
     </div>
   );
 }
