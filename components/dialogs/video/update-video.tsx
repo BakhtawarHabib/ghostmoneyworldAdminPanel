@@ -54,6 +54,7 @@ export function UpdateVideo({ id }: { id: string }) {
         mode: "onChange",
         defaultValues: {
             title: video?.title ?? "",
+            description: video?.description ?? "",
             duration: video?.duration ?? "",
             category: video?.category ?? "",
         },
@@ -64,6 +65,7 @@ export function UpdateVideo({ id }: { id: string }) {
         if (video) {
             form.reset({
                 title: video.title ?? "",
+                description: video.description??"",
                 duration: video.duration ?? "",
                 category: video.category ?? "",
             });
@@ -116,6 +118,7 @@ export function UpdateVideo({ id }: { id: string }) {
             // Prepare payload - only include fields that are being updated
             const payload: any = {
                 title: formData.title,
+                description: formData.description,
                 category: formData.category,
             };
 
@@ -176,6 +179,12 @@ export function UpdateVideo({ id }: { id: string }) {
                                 placeholder="Video Title"
                             />
 
+                            <InputFormField
+                                name="description"
+                                label="Video Description"
+                                formControl={form.control}
+                                placeholder="Video Description"
+                            />
                             {/* Existing Thumbnail Preview */}
                             {video?.thumbnail && !form.watch("thumbnail") && (
                                 <div className="space-y-2">

@@ -5,7 +5,7 @@ import z from "zod";
 export const VideoSchema = () => {
     return z.object({
         title: z.string().min(1, "Title is required"),
-             description:z.string().min(4).optional(),
+        description: z.string().optional(),
         thumbnail: z.instanceof(File).optional(),
         video: z.instanceof(File).optional(),
         category: z.string().min(1, "Category is required"),
@@ -17,7 +17,7 @@ export const VideoSchema = () => {
 export const BackendVideoSchema = () => {
     return z.object({
         title: z.string().min(1, "Title is required"),
-        description:z.string().min(4).optional(),
+        description: z.string().optional(),
         thumbnail: z.string().optional(),
         video: z.string().optional(),
         category: z.string().min(1, "Category is required"),

@@ -3,6 +3,7 @@ import { Timestamp } from "firebase/firestore";
 export interface Video {
   id?: string;
   title: string;
+  description?: string;
   thumbnail?: string;
   video?: string;
   category: string;
@@ -15,7 +16,7 @@ export interface Video {
 
 export type CreateVideoPayload = Pick<
   Video,
-  "title" | "thumbnail" | "video" | "category" | "duration" | "isActive"
+  "title" | "description" | "thumbnail" | "video" | "category" | "duration" | "isActive"
 >;
 
 export type VideoDetailResponse = {

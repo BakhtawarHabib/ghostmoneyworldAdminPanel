@@ -79,7 +79,7 @@ export function AddVideo() {
       // Prepare payload with uploaded URLs
       const payload = {
         title: formData.title,
-        descriptopn: formData.description,
+        description: formData.description,
         thumbnail: thumbnailUrl,
         video: videoUrl,
         category: formData.category,

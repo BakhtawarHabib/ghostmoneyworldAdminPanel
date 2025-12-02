@@ -46,6 +46,20 @@ export const Columns = (): ColumnDef<Video>[] => {
       },
     },
     {
+      accessorKey: "description",
+      header: () => <div className="text-start">Description</div>,
+      cell: ({ row }) => {
+        const description = row.original.description;
+        return (
+          <div className="max-w-48">
+            <span className="block truncate" title={description}>
+              {description}
+            </span>
+          </div>
+        );
+      },
+    },
+    {
       accessorKey: "video",
       header: () => <div className="text-start">Video</div>,
       cell: ({ row }) => {
