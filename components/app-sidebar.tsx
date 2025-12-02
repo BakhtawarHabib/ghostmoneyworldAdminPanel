@@ -38,7 +38,7 @@ export function AppSidebar() {
               <a href="#">
                 <IconInnerShadowTop className="size-5!" />
                 <span className="text-base font-semibold">
-                  Video Management
+                  Side Menu
                 </span>
               </a>
             </SidebarMenuButton>

@@ -17,7 +17,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Video and Categories App",
+  title: "Ghost Money World",
   description: "",
 };
 
