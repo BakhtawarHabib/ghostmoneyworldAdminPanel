@@ -52,7 +52,7 @@ export function AddVideo() {
     try {
       setIsUploading(true);
       setUploadProgress({});
-      
+
       let thumbnailUrl: string | undefined;
       let videoUrl: string | undefined;
 
@@ -161,7 +161,7 @@ export function AddVideo() {
                 formControl={form.control}
                 accept={{ "video/*": [] }}
                 maxFiles={1}
-                maxSize={50 * 1024 * 1024} // 50 MB
+                maxSize={10 * 1024 * 1024 * 1024} // 10 GB allowed for movie uploads
                 multiple={false}
                 dropText="Drop a video file here or click to select"
                 dragText="Drop video"
