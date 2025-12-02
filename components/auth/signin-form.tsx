@@ -31,25 +31,33 @@ export function SigninForm({ ...props }: React.ComponentProps<typeof Card>) {
 
   return (
     <Card {...props}>
-      <CardHeader>
-        <CardTitle> Welcome Back </CardTitle>
+      <CardHeader className="flex flex-col items-center gap-3">
+        <img
+          src="/logo.png"
+          alt="Logo"
+          className="h-30 w-30"
+        />
+        <CardTitle>Welcome Back</CardTitle>
       </CardHeader>
+
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup>
               <InputFormField
                 name="email"
-                label={"Email"}
+                label="Email"
                 placeholder="you@example.com"
                 formControl={form.control}
               />
+
               <PasswordFormField
                 name="password"
-                label={"Password"}
-                placeholder={"Enter Password"}
+                label="Password"
+                placeholder="Enter Password"
                 formControl={form.control}
               />
+
               <FieldGroup>
                 <Field>
                   <Button disabled={isPending} type="submit">
@@ -59,9 +67,7 @@ export function SigninForm({ ...props }: React.ComponentProps<typeof Card>) {
                         Signing In...
                       </>
                     ) : (
-                      <>
-                        <span>Sign In</span>
-                      </>
+                      <span>Sign In</span>
                     )}
                   </Button>
                 </Field>
