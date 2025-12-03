@@ -1,7 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
 import z from "zod";
 
-// Schema for form (accepts File objects for uploads)
 export const VideoSchema = () => {
     return z.object({
         title: z.string().min(1, "Title is required"),
@@ -13,7 +12,6 @@ export const VideoSchema = () => {
     });
 };
 
-// Schema for backend API (accepts string URLs)
 export const BackendVideoSchema = () => {
     return z.object({
         title: z.string().min(1, "Title is required"),

@@ -16,7 +16,6 @@ import {
 } from "firebase/firestore";
 import { db } from "./client";
 
-// Get a single document
 export const getDocument = async (
   collectionName: string,
   documentId: string,
@@ -35,7 +34,6 @@ export const getDocument = async (
   }
 };
 
-// Get multiple documents with optional filters
 export const getDocuments = async (
   collectionName: string,
   constraints: QueryConstraint[] = [],

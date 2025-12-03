@@ -76,13 +76,12 @@ export function AddVideo() {
         );
       }
 
-      // Prepare payload with uploaded URLs
       const payload = {
         title: formData.title,
+        category: formData.category,
         description: formData.description,
         thumbnail: thumbnailUrl,
         video: videoUrl,
-        category: formData.category,
         duration: formData.duration,
         isActive: true,
       };

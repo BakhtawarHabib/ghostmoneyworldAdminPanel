@@ -4,6 +4,7 @@ import { verifyToken } from "@/lib/auth/verify-token";
 import * as admin from "firebase-admin";
 import { FirebaseError } from "firebase/app";
 import { BackendVideoSchema } from "@/schemas/video.schema";
+import { Description } from "@radix-ui/react-dialog";
 
 const COLLECTION = "videos";
 
@@ -61,24 +62,23 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    // 2. Server-side validation using Zod
     const validationResult = BackendVideoSchema().safeParse(body);
 
     if (!validationResult.success) {
-      // Return validation errors
       return NextResponse.json(
         { errors: validationResult.error.flatten().fieldErrors },
         { status: 400 },
       );
     }
     console.log("validationResult", validationResult);
-    const { title, thumbnail, video, duration, category } =
+    const { title, description, thumbnail, video, duration, category } =
       validationResult.data;
 
     const categoryRef = adminDb.collection(COLLECTION).doc();
     const categoryData = {
       id: categoryRef.id,
       title: title,
+      description: description,
       thumbnail: thumbnail || "",
       video: video,
       duration: duration,
