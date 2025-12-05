@@ -1,13 +1,10 @@
-import { VideoCards } from "@/components/reuseable/section-cards";
-
+import { BannerUploader } from "@/components/reuseable/uploadbanner";
+import { BannerCards } from "@/components/reuseable/section-cards";
 export default function Example() {
   return (
-    <div className="w-full">
-      <div className="@container/main flex flex-1 flex-col gap-2">
-        <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-          <VideoCards />
-        </div>
-      </div>
+    <div className="w-full py-6 px-4 flex flex-col gap-6">
+      <BannerUploader />
+      <BannerCards />
     </div>
   );
 }
