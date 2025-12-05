@@ -29,19 +29,20 @@ export function BannerUploader() {
       urls.push(url);
     }
 
-    // Save banner doc to Firestore using your addDocument()
-    await addDocument("banners", {
-      urls,
-    });
+    // Save to Firestore
+    await addDocument("banners", { urls });
 
     setFiles(null);
     setLoading(false);
+
+    // Auto refresh listeners
+    window.dispatchEvent(new CustomEvent("banner-updated"));
 
     alert("Banners uploaded!");
   };
 
   return (
-    <div className="p-4 border rounded-xl flex flex-col gap-4">
+    <div className="p-4 border rounded-xl flex flex-col gap-4 bg-white">
       <input
         type="file"
         multiple
