@@ -11,7 +11,6 @@ export async function GET() {
   try {
     const snapshot = await adminDb
       .collection("categories")
-      .limit(10)
       .orderBy("createdAt", "desc")
       .get();
 
