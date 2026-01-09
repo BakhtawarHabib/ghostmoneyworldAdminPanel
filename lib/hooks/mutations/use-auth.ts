@@ -10,6 +10,7 @@ import {
   getRedirectFromUrl,
   getAndClearIntendedPath,
 } from "@/utils/redirect-handler";
+import { usersApi } from "@/lib/api/users";
 
 interface LoginCredentials {
   email: string;
@@ -132,6 +133,38 @@ export function useLogout() {
     onError: (error) => {
       console.error("Logout error:", error);
       toast.error("Failed to sign out. Please try again.");
+    },
+  });
+}
+
+// Delete Account
+export function useDeleteAccount() {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+      // First sign out from Firebase client
+      await firebaseSignOut(auth);
+      // Then delete account via API (which handles Auth and Firestore deletion)
+      return usersApi.deleteAccount();
+    },
+    onSuccess: () => {
+      // Clear session cookie
+      clearSession().catch(console.error);
+      // Clear all queries
+      queryClient.clear();
+      toast.success("Your account has been deleted successfully");
+      // Redirect to sign-in page
+      router.push("/auth/sign-in");
+    },
+    onError: (error: any) => {
+      console.error("Account deletion error:", error);
+      const errorMessage =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to delete account. Please try again.";
+      toast.error(errorMessage);
     },
   });
 }

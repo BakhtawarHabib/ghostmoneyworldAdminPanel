@@ -1,4 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export const metadata = {
   title: "Privacy Policy - Ghost Money World",
@@ -113,10 +115,23 @@ export default function PrivacyPolicyPage() {
               </p>
             </section>
 
-            <div className="pt-4 border-t">
-              <p className="text-sm text-muted-foreground">
-                If you have any questions about this Privacy Policy, please contact us through the app's support channels.
-              </p>
+            <div className="pt-4 border-t space-y-4">
+              <div>
+                <h2 className="text-2xl font-semibold mb-2">Account Deletion</h2>
+                <p className="text-muted-foreground mb-3">
+                  You have the right to delete your account at any time. When you delete your account, all your personal information, videos, categories, and associated data will be permanently removed from our systems.
+                </p>
+                <Link href="/account/delete">
+                  <Button variant="outline" className="w-full sm:w-auto">
+                    Delete My Account
+                  </Button>
+                </Link>
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  If you have any questions about this Privacy Policy, please contact us through the app's support channels.
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -124,4 +139,7 @@ export default function PrivacyPolicyPage() {
     </div>
   );
 }
+
+
+
 

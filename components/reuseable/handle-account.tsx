@@ -9,17 +9,23 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Power, Loader2 } from "lucide-react";
+import { Power, Loader2, Trash2 } from "lucide-react";
 import { LoadingOverlay } from "./loading-overlay";
+import { useRouter } from "next/navigation";
 
 export function HandleAccount() {
   const { user } = useAuthStore();
+  const router = useRouter();
   const logoutMutation = useLogout();
 
   if (!user) return null;
 
   const handleLogout = async () => {
     await logoutMutation.mutateAsync();
+  };
+
+  const handleDeleteAccount = () => {
+    router.push("/account/delete");
   };
 
   return (
@@ -50,6 +56,15 @@ export function HandleAccount() {
               <Power />
             )}
             Log out
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem 
+            onClick={handleDeleteAccount}
+            disabled={logoutMutation.isPending}
+            className="text-destructive focus:text-destructive"
+          >
+            <Trash2 className="h-4 w-4" />
+            Delete Account
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

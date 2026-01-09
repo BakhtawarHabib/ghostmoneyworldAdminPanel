@@ -21,5 +21,12 @@ export const usersApi = {
     });
     return response.data;
   },
+  deleteAccount: async (): Promise<{ success: boolean; message: string }> => {
+    const url = `${api}/account/delete`;
+    const response = await axios.delete(url, {
+      withCredentials: true,
+    });
+    return response.data;
+  },
 };
 
